@@ -1,0 +1,6 @@
+*.class
+.DS_Store
+/target
+.classpath
+.settings
+*.swp
