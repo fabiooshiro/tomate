@@ -6,7 +6,7 @@ $(function(){
 });
 
 function refreshMenu(){
-	var menuPlace = parent.menu.$('body');
+	var menuPlace = parent.menu.$('#suitePlace');
 	menuPlace.html('');
 
 	function createSpecItem(specIt){

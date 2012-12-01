@@ -5,25 +5,28 @@
 	<title>Tomate</title>
 	<style type="text/css">
 		#editor{
-			width: 50%;
+			width: 70%;
 			height: 100%;
 			position: absolute;
 			top: 0;
 			right: 0;
+			border: 0px;
 		}
 		#menu{
-			width: 50%;
+			width: 30%;
 			height: 50%;
 			position: absolute;
 			top: 0;
-			left: 0;	
+			left: 0;
+			border: 0px;
 		}
 		#runner{
-			width: 50%;
+			width: 30%;
 			height: 50%;
 			position: absolute;
 			bottom: 0;
 			left: 0;
+			border: 0px;
 		}
 	</style>
 	<script type="text/javascript">

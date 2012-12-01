@@ -12,5 +12,7 @@
 	<r:layoutResources />
 </head>
 <body>
+	<div>Click 2 run</div>
+	<div id="suitePlace"></div>
 	<r:layoutResources />
 </body>
