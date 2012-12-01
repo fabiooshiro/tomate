@@ -16,9 +16,7 @@
 	<r:layoutResources />
 	
 	<script type="text/javascript">
-	// aqui entra o runner
-	//(function() {
-		eval(parent.editor.$('#codeEditor').val());
+		eval(parent.editor.codeEditor.getValue());
 
   		var jasmineEnv = jasmine.getEnv();
   		jasmineEnv.updateInterval = 250;
@@ -48,6 +46,5 @@
 		function execJasmine() {
 			jasmineEnv.execute();
 		}
-	//})();
 	</script>
 </body>

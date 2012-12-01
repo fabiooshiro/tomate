@@ -43,7 +43,7 @@
 <body>
 	<iframe src="${createLink(controller: 'tomate', action: 'editor')}" name="editor" id="editor"></iframe>
 	<iframe src="${createLink(controller: 'tomate', action: 'menu')}" name="menu" id="menu" ></iframe>
-	<iframe src="${createLink(controller: 'tomate', action: 'runner')}" name="runner" id="runner" ></iframe>
+	<iframe src="about:blank" name="runner" id="runner" ></iframe>
 
 	<r:layoutResources />
 </body>

@@ -1,4 +1,4 @@
-function getDescriptions(){
+function getDescriptions(testCode){
 
 	var descriptions = [];
 	var currentDescribe = {};
@@ -17,8 +17,6 @@ function getDescriptions(){
 		};
 		currentDescribe.its.push(spec);
 	}
-
-	var testCode = $('#codeEditor').val();
 
 	eval(testCode);
 

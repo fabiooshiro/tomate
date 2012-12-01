@@ -3,17 +3,30 @@
 <head>
 	<meta http-equiv="content-type" content="text/html;charset=utf-8"/>
 	<title>Editor</title>
+	<style type="text/css" media="screen">
+	    #codeEditor { 
+	        position: absolute;
+	        top: 0;
+	        right: 0;
+	        bottom: 0;
+	        left: 0;
+	        width: 100%;
+	    }
+	</style>
 	<script type="text/javascript">
 	var config = {
 		contextPath: "${request.contextPath}"
 	};	
 	</script>
+	<script src="http://d1n0x3qji82z53.cloudfront.net/src-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
 	<r:require module="tomate-editor" />
 	<r:layoutResources />
 </head>
 <body>
-	<a href="javascript: refreshMenu()">Refresh Menu</a>
-	<textarea id="codeEditor" name="codeEditor" style="width:100%; height:500px">
+	<div id="codeEditor" name="codeEditor"></div>
+	<div id="filesPlace"></div>
+
+	<div style="display: none" id="sampleCode">
 	// isso eh um teste
 	describe("How to", function() {
 		
@@ -48,7 +61,7 @@
 			// timeout to exec navigation
 			waitsFor(function() {
 		      	return done;
-		    }, "The Value should be incremented", 10000);
+		    }, "The Value should be incremented", 3000);
 
 			// finally execute the end verification
 		    runs(function(){
@@ -70,7 +83,7 @@
 
 			waitsFor(function() {
 		      	return done;
-		    }, "The Value should be incremented", 10000);
+		    }, "The Value should be incremented", 3000);
 
 		    // finally execute the end verification
 		    runs(function(){
@@ -103,7 +116,7 @@
 
 			waitsFor(function() {
 		      	return done;
-		    }, "The Value should be incremented", 10000);
+		    }, "The Value should be incremented", 3000);
 
 		    // finally execute the end verification
 		    runs(function(){
@@ -112,7 +125,6 @@
 		    });
 		});
 	});
-	</textarea>
-
+	</script>
 	<r:layoutResources />
 </body>
