@@ -6,9 +6,9 @@ Using jasmine.js and ace.js
 
 Sample project is 'how-to-tomate'.
 
-<code>
+<code><pre>
 git checkout git://github.com/fabiooshiro/tomate.git
 git checkout git://github.com/fabiooshiro/how-to-tomate.git
 cd how-to-tomate
 grails run-app
-</code>
+</pre></code>
