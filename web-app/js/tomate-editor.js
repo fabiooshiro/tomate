@@ -1,12 +1,10 @@
 //tomate-editor.js
-
+var context = {};
 var codeEditor;
 $(function(){
 	//var code = $('#testCodeHolder').text();
 	//$('#codeEditor').val(code);
 	parent.jQeditor = $;
-
-	var context = {};
     var editor = ace.edit("codeEditor");
     editor.setTheme("ace/theme/monokai");
     editor.getSession().setMode("ace/mode/javascript");
@@ -20,6 +18,9 @@ $(function(){
             }
             $.post(config.contextPath + '/tomate/writeFile', {filename: context.filename, data: data}, function(res){
                 console.log(res);
+                if(res == 'ok'){
+                	refreshMenu();
+                }
             }, 'json');
         }
     });
@@ -37,64 +38,68 @@ $(function(){
     		createNewFile();
         }
     });
-
-    function createNewFile(){
-		context.filename = prompt('File will be saved in web-app/js/tests');
-        editor.setValue($('#sampleCode').text());
-        $('#codeEditor').show();
-        $('#filesPlace').hide();
-    }
-
-    function createNewFileLink(){
-    	return $('<a>').click(createNewFile)
-    		.css('display', 'block')
-    		.text('New File (Command-M)')
-    		.attr('href', '#newFile');
-    }
-
-    function createFileLink(file){
-		return $('<a>').click(function(){
-    			openFile(file);
-    		})
-    		.css('display', 'block')
-    		.text(file)
-    		.attr('href', '#openFile' + file);
-    }
-
-    function createCancelFileOpen(){
-    	return $('<a>').click(function(){
-    			$('#codeEditor').show();
-    			$('#filesPlace').hide();
-    		})
-    		.text('Cancel')
-    		.css('display', 'block')
-    		.attr('href', '#cancelFileOpen');
-    }
-    function showFileChooser(){
-    	$('#codeEditor').hide();
-    	$('#filesPlace').show();
-		var filesPlace = $('#filesPlace');
-		filesPlace.empty();
-		filesPlace.append(createCancelFileOpen());
-		filesPlace.append(createNewFileLink());
-    	$.get(config.contextPath + '/tomate/listFiles', function(data) {
-    		for(var i = 0; i < data.length; i++){
-    			console.log(data[i]);
-    			filesPlace.append(createFileLink(data[i]));	
-    		}
-    	});
-    }
-    function openFile(filename){
-    	$.get(config.contextPath + '/tomate/readFile', {filename: filename}, function(data) {
-            editor.setValue(data);
-            context.filename = filename;
-            $('#codeEditor').show();
-    		$('#filesPlace').hide();
-        });
-    }
+    
     codeEditor = editor;
     codeEditor.setValue("// press Command-O or Ctrl-O");
 });
+
+function createNewFile(){
+	context.filename = prompt('File will be saved in web-app/js/tests');
+    codeEditor.setValue($('#sampleCode').text());
+    $('#codeEditor').show();
+    $('#filesPlace').hide();
+}
+
+function createNewFileLink(){
+	return $('<a>').click(createNewFile)
+		.css('display', 'block')
+		.text('New File (Command-M)')
+		.attr('href', '#newFile');
+}
+
+function createFileLink(file){
+	return $('<a>').click(function(){
+			openFile(file);
+		})
+		.css('display', 'block')
+		.text(file)
+		.attr('href', '#openFile' + file);
+}
+
+function createCancelFileOpen(){
+	return $('<a>').click(function(){
+			$('#codeEditor').show();
+			$('#filesPlace').hide();
+		})
+		.text('Cancel')
+		.css('display', 'block')
+		.attr('href', '#cancelFileOpen');
+}
+
+function openFile(filename){
+	$.get(config.contextPath + '/tomate/readFile', {filename: filename}, function(data) {
+        codeEditor.setValue(data);
+        context.filename = filename;
+        $('#codeEditor').show();
+		$('#filesPlace').hide();
+		refreshMenu();
+    });
+}
+
+function showFileChooser(){
+	$('#codeEditor').hide();
+	$('#filesPlace').show();
+	var filesPlace = $('#filesPlace');
+	filesPlace.empty();
+	filesPlace.append(createCancelFileOpen());
+	filesPlace.append(createNewFileLink());
+	$.get(config.contextPath + '/tomate/listFiles', function(data) {
+		for(var i = 0; i < data.length; i++){
+			console.log(data[i]);
+			filesPlace.append(createFileLink(data[i]));	
+		}
+	});
+}
 
 function refreshMenu(){
 	var menuPlace = parent.menu.$('#suitePlace');

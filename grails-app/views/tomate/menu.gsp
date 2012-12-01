@@ -10,12 +10,16 @@
 	function refreshMenu(){
 		parent.editor.refreshMenu();
 	}
+	function openFileChooser(){
+		parent.editor.showFileChooser();
+	}
 	</script>
 	<r:require module="tomate-menu" />
 	<r:layoutResources />
 </head>
 <body>
-	<div>Click 2 run <a href="javascript: refreshMenu()">Refresh Menu</a></div>
+	<div><a href="javascript: refreshMenu()">Refresh</a> <a href="javascript: openFileChooser()">Open File</a></div>
+	<div>Click 2 run </div>
 	<div id="suitePlace"></div>
 	<r:layoutResources />
 </body>
