@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta http-equiv="content-type" content="text/html;charset=utf-8"/>
-	<title>introduction.js</title>
+	<title>Runner</title>
 	<script type="text/javascript">
 	var config = {
 		contextPath: "${request.contextPath}"
@@ -14,9 +14,15 @@
 </head>
 <body>
 	<r:layoutResources />
-	
+
+	<g:if test="${params.fileName}">
+		<script type="text/javascript" src="${request.contextPath}/js/tests/${params.fileName}"></script>
+		<iframe src="about:blank" name="appFrame" width="1024" height="968"></iframe>
+	</g:if>
 	<script type="text/javascript">
-		eval(parent.editor.codeEditor.getValue());
+		<g:if test="${params.fileName == null }">
+			eval(parent.editor.codeEditor.getValue());
+		</g:if>
 
   		var jasmineEnv = jasmine.getEnv();
   		jasmineEnv.updateInterval = 250;

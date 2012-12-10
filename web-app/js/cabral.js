@@ -5,7 +5,11 @@ var cabral = new function(){
 	}
 
 	function getWin(){
-		return window.parent.window.opener;
+		if(window.parent.window.opener){
+			return window.parent.window.opener;	
+		}else{
+			return window.appFrame;
+		}
 	}
 
 	/**
@@ -27,9 +31,8 @@ var cabral = new function(){
 				,true      // can bubble?
 				,true      // cancelable?
 			);
-			allowDefaultAction = link.dispatchEvent(e);           
+			allowDefaultAction = link.dispatchEvent(e);
 		}
-	         
 		if (allowDefaultAction){
 			var f = getWin().document.createElement('form');
 			f.action = link.href;

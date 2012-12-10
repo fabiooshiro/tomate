@@ -32,7 +32,7 @@
 	<script type="text/javascript">
 	var config = {
 		contextPath: "${request.contextPath}"
-	};	
+	};
 	</script>
 
 	<r:require module="jquery" />
