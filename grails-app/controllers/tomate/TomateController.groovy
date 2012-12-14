@@ -2,6 +2,10 @@ package tomate
 
 class TomateController {
 
+    def welcome(){
+        
+    }
+
     def index() { }
 
     def runner() { }
