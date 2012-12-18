@@ -22,11 +22,11 @@ cd how-to-tomate
 grails run-app
 ```
 
-Open http://localhost:8080/yourApp/tomate/welcome
+Open http://localhost:8080/how-to-tomate/tomate/welcome
 
 ## Continuous Integration - CI
 
-There is a example using phantomjs in how-to-tomate
+There is an example using phantomjs in how-to-tomate
 ```sh
 phantomjs phantomscript.js
 ```
