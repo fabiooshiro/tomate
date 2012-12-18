@@ -30,3 +30,7 @@ There is an example using phantomjs in how-to-tomate
 ```sh
 phantomjs phantomscript.js
 ```
+or 
+```sh
+grails phantom-tomate
+```
