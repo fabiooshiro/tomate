@@ -12,6 +12,15 @@ var cabral = new function(){
 		}
 	}
 
+	function callCallBack(callback, args){
+		if(typeof(getWin()['$']) != 'undefined'){
+			callback(getWin().$, args);	
+		}else{
+			console.log('No jQuery found...');
+			callback(getWin(), args);
+		}
+	}
+
 	/**
 	 * ref http://blog.stchur.com/2010/01/15/programmatically-clicking-a-link-in-javascript/
 	 */
@@ -55,9 +64,8 @@ var cabral = new function(){
 			var t;
 			if(t = comparator(uri)){
 				onPageChange();
-				callback(getWin().$, t);
+				callCallBack(callback, t);
 			}else{
-				console.log("uri " + uri + " nao casa com " + getWin().location.href);
 				setTimeout(loadListener, 250);
 			}
 		}
@@ -66,7 +74,8 @@ var cabral = new function(){
 
 	this.navigateTo = function(uri, callback){
 		if(endsWithComparator(uri)){
-			callback(getWin().$, true);
+			callCallBack(callback, true);
+			
 		}else{
 			getWin().location.href = config.contextPath + uri;
 			waitForUrl(uri, endsWithComparator, callback);	

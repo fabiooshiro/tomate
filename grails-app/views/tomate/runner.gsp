@@ -31,11 +31,10 @@
 
   		// aqui entra o filtro do teste
   		jasmineEnv.specFilter = function(spec) {
-  			//console.log("spec");
-  			//console.log(spec);
   			var res = htmlReporter.specFilter(spec);
-  			//console.log("res");
-  			console.log(res);
+  			if(res){
+  				console.log("Running " + spec.description);
+        	}
     		return res;
   		};
 

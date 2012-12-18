@@ -32,7 +32,7 @@
 		
 		it("create a book", function() {
 			var done = false;
-			var jquery, matches;
+			var jQuery, matches;
 			runs(function(){
 
 				// go to book create, so dont forget the language param
@@ -51,7 +51,7 @@
 					cabral.waitFor(/\/book\/show\/(.*)/g, function($, m){
 
 						// keep this things for final evaluation
-						jquery = $;
+						jQuery = $;
 						matches = m;
 						done = true;
 					});
@@ -66,17 +66,17 @@
 			// finally execute the end verification
 		    runs(function(){
 		    	expect(
-		    		jquery('.message').text()
+		    		jQuery('.message').text()
 		    	).toBe('Book ' + matches[1] + ' criado');
 		    });
 		});
 
 		it("list books", function(){
 			var done = false;
-			var jquery;
+			var jQuery;
 			runs(function(){
 				cabral.navigateTo('/book/list', function($){
-					jquery = $;
+					jQuery = $;
 					done = true;
 				});
 			});
@@ -87,13 +87,13 @@
 
 		    // finally execute the end verification
 		    runs(function(){
-		    	expect(jquery('title').text()).toBe("Book Listagem");
+		    	expect(jQuery('title').text()).toBe("Book Listagem");
 		    });
 		});
 
 		it("delete a book", function(){
 			var done = false;
-			var jquery, matches;
+			var jQuery, matches;
 			runs(function(){
 				cabral.navigateTo('/book/list', function($){
 					var aLs = $('a').filter(function(){
@@ -107,7 +107,7 @@
 						$('.delete').click();
 						matches = m;
 						cabral.waitFor('/book/list', function($, m){
-							jquery = $;
+							jQuery = $;
 							done = true;
 						});
 					});
@@ -120,8 +120,8 @@
 
 		    // finally execute the end verification
 		    runs(function(){
-		    	expect(jquery('title').text()).toBe("Book Listagem");
-		    	expect(jquery('.message').text()).toBe("Book " + matches[1] + " removido");
+		    	expect(jQuery('title').text()).toBe("Book Listagem");
+		    	expect(jQuery('.message').text()).toBe("Book " + matches[1] + " removido");
 		    });
 		});
 	});
