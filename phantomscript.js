@@ -16,7 +16,11 @@ page.onConsoleMessage = function (msg) {
 console.log("Starting test");
 window.setInterval(function(){
     var duration = page.evaluate(function () {
-        return $('.duration').text();
+        if(typeof($) != 'undefined'){
+            return $('.duration').text();
+        }else{
+            return false;
+        }
     });
     if(duration){
         var passed = page.evaluate(function(){
@@ -30,19 +34,30 @@ window.setInterval(function(){
             }
             return ok;
         });
+        
         if(passed){
-            console.log("All tests passed.");
+            console.log("All " + fileName + " tests passed.");
             phantom.exit();
         }else{
+            console.log(fileName + " fail...");
             var txtError = page.evaluate(function(){
-                return $('#details').text();
+                var errors = [];
+                var details = $('.specDetail');
+                for(var i = 0; i<details.length; i++){
+                    var eTxt = $(details[i]).text();
+                    errors.push(eTxt);
+                }
+                return errors.join('\n');
             });
-            console.log("Fail...");
+            console.log(txtError);
+
+            //ini pero vaz
             var fs = require('fs');
             var f = fs.open('htmlcode.txt', "w");
             f.write(page.content);
-            f.close();  
-            console.log(txtError);
+            f.close();
+            //end pero vaz
+
             phantom.exit(1);
         }
     }
