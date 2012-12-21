@@ -1,13 +1,28 @@
 var page = require('webpage').create();
 var system = require('system');
 
-if(system.args.length!=3){
+if(system.args.length < 3){
     console.log("usage phanthonjs phantomscript.js http://localhost:8080/how-to-tomate bruno.js");
     phantom.exit(1);
 }
 
+console.log(system.args);
 var appUrl = system.args[1];
 var fileName = system.args[2];
+var authParams, authUri2post = false;
+if(system.args.length > 4){
+    var authArgs = [];
+    for (var i = 3; (i+1) < system.args.length; i+=2) {
+        var name = system.args[i];
+        var value = system.args[i+1];
+        if(name == 'uri2post'){
+            authUri2post = value;
+        }else{
+            authArgs.push(name + '=' + value);
+        }
+    };
+    authParams = authArgs.join('&');
+}
 
 page.onConsoleMessage = function (msg) {
     console.log('User page msg: ' + msg);
@@ -63,7 +78,36 @@ window.setInterval(function(){
     }
 }, 500);
 
-page.open(appUrl + '/tomate/runner?fileName=' + fileName, function () {
-    //console.log("running some navigation ...");
-});
+var tomatePageChecked = false;
 
+function openTomateRunner(){
+    page.open(appUrl + '/tomate/runner?fileName=' + fileName, function () {
+        console.log('Page navigation...')
+        if(!tomatePageChecked){
+            tomatePageChecked = true;
+            var title = page.evaluate(function () {
+                return document.title;
+            });
+            console.log('Page title is ' + title);
+            if(title != 'Tomate Runner'){
+                console.log("Wrong tomate runner page...")
+                console.log("Some spring security fail?")
+                phantom.exit(1);
+            }
+        }
+    });
+}
+
+if(authUri2post){
+    var data = authParams;
+    page.open(appUrl + authUri2post, 'post', data, function (status) {
+        if (status !== 'success') {
+            console.log('Unable to post!');
+            phantom.exit(1);
+        } else {
+            openTomateRunner();
+        }
+    });
+}else{
+    openTomateRunner();
+}

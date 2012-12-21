@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta http-equiv="content-type" content="text/html;charset=utf-8"/>
-	<title>Runner</title>
+	<title>Tomate Runner</title>
 	<script type="text/javascript">
 	var config = {
 		contextPath: "${request.contextPath}"

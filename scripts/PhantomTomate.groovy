@@ -4,19 +4,37 @@ includeTargets << grailsScript("_GrailsRun")
 
 target('default': "Runs project and tomate") {
 	depends(checkVersion, configureProxy, packageApp, parseArguments)
-	runApp()
+	if (argsMap.https) {
+        runAppHttps()
+    }
+    else {
+        runApp()
+    }
+    startPluginScanner()
+
     println "Starting phantom ${tomatePluginDir}"
     def serverUrl = "http://${serverHost ?: 'localhost'}:${serverPort}$serverContextPath"
 
     def testRunner = { jsTestFile ->
-    	println "Running ${jsTestFile} ..."
+    	println "Tomate running ${jsTestFile} ..."
 
 	    def sout = new StringBuffer(), serr = new StringBuffer()
 		def proc
 		try{
-			proc = ('phantomjs ' + tomatePluginDir + '/phantomscript.js ' + serverUrl + ' ' + jsTestFile).execute()
+			if(config.tomate.auth){
+				println "Using tomate.auth config ${config.tomate.auth}"
+				def authParams = []
+				config.tomate.auth.each{ k, v ->
+					authParams.add(k)
+					authParams.add(v)
+				}
+				def shCommand = 'phantomjs ' + tomatePluginDir + '/phantomscript.js ' + serverUrl + ' ' + jsTestFile + ' ' + (authParams.join(' '))
+				proc = shCommand.execute()
+			}else{
+				proc = ('phantomjs ' + tomatePluginDir + '/phantomscript.js ' + serverUrl + ' ' + jsTestFile).execute()
+			}
 		}catch(Throwable e){
-			println "Fail: make sure that phantomjs is installed."
+			println "Fail: make sure that phantomjs is installed. Error: ${e.message}."
 			e.printStackTrace()
 		}
 		proc.consumeProcessOutput(sout, serr)
