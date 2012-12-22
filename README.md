@@ -1,15 +1,15 @@
 # Tomate
 
-Tomate is a grails plugin for javascript testing.
-Using jasmine.js and ace.js
+Tomate is a <a href="http://grails.org">Grails</a> plugin for javascript testing.
+Using <a href="http://pivotal.github.com/jasmine/">jasmine.js</a> and ace.js
 
 ## Target
 
 1. Export results to CI
-2. Smooth learning curve
+2. Smooth learning curve (<a href="http://jquery.com/">jQuery</a> and <a href="http://pivotal.github.com/jasmine/">Jasmine</a>)
 3. Code and Run (not code compile wait Zzzz.. and run)
 4. Browser powered debug tools. eg. firebug, chrome
-5. Some page navigation
+5. Some page navigation (Cabral)
 
 Sample project is 'how-to-tomate'.
 
