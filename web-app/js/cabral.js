@@ -13,12 +13,17 @@ var cabral = new function(){
 	}
 
 	function callCallBack(callback, args){
-		if(typeof(getWin()['$']) != 'undefined'){
-			callback(getWin().$, args);	
-		}else{
-			console.log('No jQuery found...');
-			callback(getWin(), args);
-		}
+		var tid = setInterval( function () {
+		    if ( getWin().document.readyState !== 'complete' ) return;
+		    clearInterval( tid );
+
+		    if(typeof(getWin()['$']) != 'undefined'){
+				callback(getWin().$, args);	
+			}else{
+				console.log('No jQuery found...');
+				callback(getWin(), args);
+			}
+		}, 100 );
 	}
 
 	/**

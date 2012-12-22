@@ -4,17 +4,20 @@ includeTargets << grailsScript("_GrailsRun")
 
 target('default': "Runs project and tomate") {
 	depends(checkVersion, configureProxy, packageApp, parseArguments)
-	if (argsMap.https) {
-        runAppHttps()
-    }
-    else {
-        runApp()
-    }
-    startPluginScanner()
-
-    println "Starting phantom ${tomatePluginDir}"
-    def serverUrl = "http://${serverHost ?: 'localhost'}:${serverPort}$serverContextPath"
-
+	def serverUrl
+	if (!argsMap.tomateUrl){
+		if (argsMap.https) {
+	        runAppHttps()
+	    }
+	    else {
+	        runApp()
+	    }
+	    startPluginScanner()
+	    serverUrl = "http://${serverHost ?: 'localhost'}:${serverPort}$serverContextPath"
+	}else{
+		serverUrl = argsMap.tomateUrl
+	}
+	println "Starting phantom ${tomatePluginDir}"
     def testRunner = { jsTestFile ->
     	println "Tomate running ${jsTestFile} ..."
 
@@ -62,7 +65,9 @@ target('default': "Runs project and tomate") {
 			exitVal = 1
     	}
     }
-	println "stopping server..."
-    stopServer()
+    if (!argsMap.tomateUrl){
+		println "stopping server..."
+    	stopServer()
+	}
 	return exitVal
 }
