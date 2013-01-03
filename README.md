@@ -11,7 +11,7 @@ Using <a href="http://pivotal.github.com/jasmine/">jasmine.js</a> and ace.js
 4. Browser powered debug tools. eg. firebug, chrome
 5. Some page navigation (Cabral)
 
-Sample project is 'how-to-tomate'.
+Sample project here: '<a href="https://github.com/fabiooshiro/how-to-tomate">how-to-tomate</a>'.
 
 ## QuickStart
 
@@ -20,9 +20,10 @@ git clone git://github.com/fabiooshiro/tomate.git
 git clone git://github.com/fabiooshiro/how-to-tomate.git
 cd how-to-tomate
 grails run-app
+
 ```
 
-Open http://localhost:8080/how-to-tomate/tomate/welcome
+Open <a href="http://localhost:8080/how-to-tomate/tomate/welcome">http://localhost:8080/how-to-tomate/tomate/welcome</a>
 
 ## Continuous Integration - CI
 
