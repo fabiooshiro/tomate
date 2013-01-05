@@ -9,7 +9,7 @@ Using <a href="http://pivotal.github.com/jasmine/">jasmine.js</a> and ace.js
 2. Smooth learning curve (<a href="http://jquery.com/">jQuery</a> and <a href="http://pivotal.github.com/jasmine/">Jasmine</a>)
 3. Code and Run (not code compile wait Zzzz.. and run)
 4. Browser powered debug tools. eg. firebug, chrome
-5. Some page navigation (Cabral)
+5. Some page navigation (<a href="https://github.com/fabiooshiro/cabral">Cabral</a>)
 
 Sample project here: '<a href="https://github.com/fabiooshiro/how-to-tomate">how-to-tomate</a>'.
 
