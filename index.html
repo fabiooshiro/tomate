@@ -1,67 +1,130 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
+    <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Tomate by fabiooshiro</title>
-
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <script src="javascripts/scale.fix.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+    <title>Tomate by fabiooshiro</title>
   </head>
+
   <body>
-    <div class="wrapper">
-      <header>
-        <h1 class="header">Tomate</h1>
-        <p class="header">Tomate</p>
+    <div id="container">
+      <div class="inner">
 
-        <ul>
-          <li class="download"><a class="buttons" href="https://github.com/fabiooshiro/tomate/zipball/master">Download ZIP</a></li>
-          <li class="download"><a class="buttons" href="https://github.com/fabiooshiro/tomate/tarball/master">Download TAR</a></li>
-          <li><a class="buttons github" href="https://github.com/fabiooshiro/tomate">View On GitHub</a></li>
-        </ul>
+        <header>
+          <h1>Tomate</h1>
+          <h2>Tomate</h2>
+        </header>
 
-        <p class="header">This project is maintained by <a class="header name" href="https://github.com/fabiooshiro">fabiooshiro</a></p>
+        <section id="downloads" class="clearfix">
+          <a href="https://github.com/fabiooshiro/tomate/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
+          <a href="https://github.com/fabiooshiro/tomate/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
+          <a href="https://github.com/fabiooshiro/tomate" id="view-on-github" class="button"><span>View on GitHub</span></a>
+        </section>
 
+        <hr>
 
-      </header>
-      <section>
-        <h3>Welcome to GitHub Pages.</h3>
+        <section id="main_content">
+          <h1>Tomate</h1>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+<p>Tomate is a <a href="http://grails.org">Grails</a> plugin for javascript testing.
+Using <a href="http://pivotal.github.com/jasmine/">jasmine.js</a> and ace.js</p>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
+<h2>Target</h2>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+<ol>
+<li>Export results to CI</li>
+<li>Smooth learning curve (<a href="http://jquery.com/">jQuery</a> and <a href="http://pivotal.github.com/jasmine/">Jasmine</a>)</li>
+<li>Code and Run (not code compile wait Zzzz.. and run)</li>
+<li>Browser powered debug tools. eg. firebug, chrome</li>
+<li>Some page navigation (<a href="https://github.com/fabiooshiro/cabral">Cabral</a>)</li>
+</ol><p>Sample project here: '<a href="https://github.com/fabiooshiro/how-to-tomate">how-to-tomate</a>'.</p>
 
-<h3>Designer Templates</h3>
+<h2>QuickStart</h2>
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+<div class="highlight"><pre>git clone git://github.com/fabiooshiro/tomate.git
+git clone git://github.com/fabiooshiro/how-to-tomate.git
+<span class="nb">cd </span>how-to-tomate
+grails run-app
 
-<h3>Rather Drive Stick?</h3>
+</pre></div>
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+<p>Open <a href="http://localhost:8080/how-to-tomate/tomate/welcome">http://localhost:8080/how-to-tomate/tomate/welcome</a></p>
 
-<h3>Authors and Contributors</h3>
+<p>And start coding your test!</p>
 
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
+<p>New files will be filled with a sample code like:</p>
 
-<h3>Support or Contact</h3>
+<div class="highlight"><pre><span class="nx">describe</span><span class="p">(</span><span class="s2">"Some feature"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="c1">// just jasmine</span>
+    <span class="nx">it</span><span class="p">(</span><span class="s2">"should do something"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="c1">// just jasmine</span>
+        <span class="kd">var</span> <span class="nx">done</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+        <span class="kd">var</span> <span class="nx">jQuery</span><span class="p">,</span> <span class="nx">matches</span><span class="p">;</span>
+        <span class="nx">runs</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+            <span class="nx">cabral</span><span class="p">.</span><span class="nx">navigateTo</span><span class="p">(</span><span class="s1">'/book/create'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">){</span> <span class="c1">// cabral navigation</span>
+                <span class="nx">$</span><span class="p">(</span><span class="s1">'#title'</span><span class="p">).</span><span class="nx">val</span><span class="p">(</span><span class="s2">"my book title"</span><span class="p">);</span> <span class="c1">// just jquery</span>
+                <span class="nx">$</span><span class="p">(</span><span class="s1">'#create'</span><span class="p">).</span><span class="nx">click</span><span class="p">();</span> <span class="c1">// just jquery</span>
+                <span class="nx">cabral</span><span class="p">.</span><span class="nx">waitFor</span><span class="p">(</span><span class="sr">/\/book\/show\/(.*)/g</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">,</span> <span class="nx">m</span><span class="p">){</span>
+                    <span class="nx">jQuery</span> <span class="o">=</span> <span class="nx">$</span><span class="p">;</span> <span class="c1">// keep last jQuery from show.gsp</span>
+                    <span class="nx">matches</span> <span class="o">=</span> <span class="nx">m</span><span class="p">;</span> <span class="c1">// if you need the id ...</span>
+                    <span class="nx">done</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+                <span class="p">});</span>
+            <span class="p">});</span>
+        <span class="p">});</span>
 
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
-      </section>
-      <footer>
-        <p><small>Hosted on <a href="https://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
-      </footer>
+        <span class="c1">// jasmine timeout to exec navigation</span>
+        <span class="nx">waitsFor</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nx">done</span><span class="p">;</span>
+        <span class="p">},</span> <span class="s1">'navigation time out'</span><span class="p">,</span> <span class="mi">30000</span><span class="p">);</span>
+
+        <span class="nx">runs</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+            <span class="nx">expect</span><span class="p">(</span>
+                <span class="nx">jQuery</span><span class="p">(</span><span class="s1">'.message'</span><span class="p">)[</span><span class="mi">0</span><span class="p">].</span><span class="nx">innerHTML</span>
+            <span class="p">).</span><span class="nx">toMatch</span><span class="p">(</span><span class="sr">/Book .* created/g</span><span class="p">);</span>
+        <span class="p">});</span>
+    <span class="p">});</span>
+<span class="p">});</span>
+</pre></div>
+
+<h2>Continuous Integration - CI</h2>
+
+<p>There is a grails script using phantomjs</p>
+
+<div class="highlight"><pre>grails phantom-tomate
+</pre></div>
+
+<h3>Spring Security Integration</h3>
+
+<p>You can configure an url to post user and pass</p>
+
+<div class="highlight"><pre><span class="c1">// Tomate auth configuration</span>
+<span class="n">tomate</span><span class="o">.</span><span class="na">auth</span><span class="o">.</span><span class="na">uri2post</span><span class="o">=</span><span class="s1">'/j_spring_security_check'</span>
+<span class="n">tomate</span><span class="o">.</span><span class="na">auth</span><span class="o">.</span><span class="na">j_username</span> <span class="o">=</span> <span class="s1">'tester'</span>
+<span class="n">tomate</span><span class="o">.</span><span class="na">auth</span><span class="o">.</span><span class="na">j_password</span> <span class="o">=</span> <span class="s1">'tester'</span>
+</pre></div>
+
+<p>Before every test file the tomate will post to '/j_spring_security_check' the username and password.
+If you have your own auth code you can modify the params to be posted.</p>
+
+<div class="highlight"><pre><span class="c1">// Tomate auth configuration</span>
+<span class="n">tomate</span><span class="o">.</span><span class="na">auth</span><span class="o">.</span><span class="na">uri2post</span><span class="o">=</span><span class="s1">'/user/chkpass'</span>
+<span class="n">tomate</span><span class="o">.</span><span class="na">auth</span><span class="o">.</span><span class="na">myUsername</span> <span class="o">=</span> <span class="s1">'tester'</span>
+<span class="n">tomate</span><span class="o">.</span><span class="na">auth</span><span class="o">.</span><span class="na">myPassword</span> <span class="o">=</span> <span class="s1">'tester'</span>
+</pre></div>
+        </section>
+
+        <footer>
+          Tomate is maintained by <a href="https://github.com/fabiooshiro">fabiooshiro</a><br>
+          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="http://twitter.com/jasonlong">Jason Long</a>.
+        </footer>
+
+        
+      </div>
     </div>
-    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
-		
   </body>
 </html>
