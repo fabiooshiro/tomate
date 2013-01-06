@@ -25,13 +25,67 @@ grails run-app
 
 Open <a href="http://localhost:8080/how-to-tomate/tomate/welcome">http://localhost:8080/how-to-tomate/tomate/welcome</a>
 
+And start coding your test!
+
+New files will be filled with a sample code like:
+
+```javascript
+describe("Some feature", function() { // just jasmine
+    it("should do something", function() { // just jasmine
+        var done = false;
+        var jQuery, matches;
+        runs(function(){
+            cabral.navigateTo('/book/create', function($){ // cabral navigation
+                $('#title').val("my book title"); // just jquery
+                $('#create').click(); // just jquery
+                cabral.waitFor(/\/book\/show\/(.*)/g, function($, m){
+                    jQuery = $; // keep last jQuery from show.gsp
+                    matches = m; // if you need the id ...
+                    done = true;
+                });
+            });
+        });
+        
+        // jasmine timeout to exec navigation
+        waitsFor(function() {
+            return done;
+        }, 'navigation time out', 30000);
+
+        runs(function(){
+            expect(
+                jQuery('.message')[0].innerHTML
+            ).toMatch(/Book .* created/g);
+        });
+    });
+});
+```
+
 ## Continuous Integration - CI
 
-There is an example using phantomjs in how-to-tomate
-```sh
-phantomjs phantomscript.js
-```
-or 
+There is a grails script using phantomjs
 ```sh
 grails phantom-tomate
 ```
+
+### Spring Security Integration
+
+You can configure an url to post user and pass
+```groovy
+// Tomate auth configuration
+tomate.auth.uri2post='/j_spring_security_check'
+tomate.auth.j_username = 'tester'
+tomate.auth.j_password = 'tester'
+```
+
+Before every test file the tomate will post to '/j_spring_security_check' the username and password.
+If you have your own auth code you can modify the params to be posted.
+
+```groovy
+// Tomate auth configuration
+tomate.auth.uri2post='/user/chkpass'
+tomate.auth.myUsername = 'tester'
+tomate.auth.myPassword = 'tester'
+```
+
+
+
