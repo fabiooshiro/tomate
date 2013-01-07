@@ -60,6 +60,20 @@ describe("Some feature", function() { // just jasmine
 });
 ```
 
+## Download and Install
+
+This plugin isn't published at grails plugins site yet.
+
+Now clone this project 
+```sh
+cd workspace
+git clone git://github.com/fabiooshiro/tomate.git
+```
+and add this line in your file /yourgrailsproject/grails-app/conf/BuildConfig.groovy
+```groovy
+grails.plugin.location.tomate = "../tomate" // inline plugin
+```
+
 ## Continuous Integration - CI
 
 There is a grails script using phantomjs
