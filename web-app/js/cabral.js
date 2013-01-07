@@ -1,14 +1,22 @@
 var cabral = new function(){
 
+	var _config = typeof(config) == 'undefined' ? {contextPath: ''} : config;
+
+	var win = 'appFrame';
+	var self = this;
 	function onPageChange(){
 		getWin().confirm = function(){return true};
 	}
 
+	this.setFrameName = function(anFrameName){
+		win = anFrameName;
+	};
+
 	function getWin(){
 		if(window.parent.window.opener){
-			return window.parent.window.opener;	
+			return window.parent.window.opener;
 		}else{
-			return window.appFrame;
+			return window[win];
 		}
 	}
 
@@ -80,9 +88,8 @@ var cabral = new function(){
 	this.navigateTo = function(uri, callback){
 		if(endsWithComparator(uri)){
 			callCallBack(callback, true);
-			
 		}else{
-			getWin().location.href = config.contextPath + uri;
+			getWin().location.href = _config.contextPath + uri;
 			waitForUrl(uri, endsWithComparator, callback);	
 		}
 	};
@@ -91,6 +98,25 @@ var cabral = new function(){
 		waitForUrl(uri, (typeof(uri) == 'string' ? endsWithComparator : regexComparator), callback);
 	};
 
-	this.clickLink = actuateLink;
+	/**
+	 * Default usage: 
+	 *	 cabral.clickLink('link text', function(winOrJquery){
+	 *
+	 *	 });
+	 */
+	this.clickLink = function(){
+		if(arguments.length == 2){
+			var links = getWin().document.getElementsByTagName('a');
+			for(var i = 0; i < links.length; i++){
+				if(links[i].innerHTML == arguments[0]){
+					actuateLink(links[i]);
+					self.waitFor(links[i].getAttribute('href'), arguments[1]);
+					break;
+				}
+			}
+		}else if(arguments.length == 1){
+			actuateLink(arguments[0]);
+		}
+	};
 };
 

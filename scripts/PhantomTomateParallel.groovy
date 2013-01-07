@@ -1,22 +1,13 @@
 import java.lang.StringBuffer
+import java.util.concurrent.*
 
 includeTargets << grailsScript("_GrailsRun")
 
 target('default': "Runs project and tomate") {
 	depends(checkVersion, configureProxy, packageApp, parseArguments)
-	def serverUrl
-	if (!argsMap.tomateUrl){
-		if (argsMap.https) {
-	        runAppHttps()
-	    }
-	    else {
-	        runApp()
-	    }
-	    startPluginScanner()
-	    serverUrl = "http://${serverHost ?: 'localhost'}:${serverPort}$serverContextPath"
-	}else{
-		serverUrl = argsMap.tomateUrl
-	}
+	def serverUrl = argsMap.tomateUrl
+	def maxPhantomInstances = 3
+	
 	println "Starting phantom ${tomatePluginDir}"
     def testRunner = { jsTestFile ->
     	println "Tomate running ${jsTestFile} ..."
@@ -58,18 +49,29 @@ target('default': "Runs project and tomate") {
     }
     ls.sort()
 
+    def pool = Executors.newFixedThreadPool(maxPhantomInstances)
+    def future = { c -> pool.submit(c as Callable) }
+    def futures = []
     def exitVal = 0
+
     def startTime = System.currentTimeMillis()
-    ls.each{
-    	def exitCode = testRunner(it)
+    ls.each{ jsTestFileName ->
+		futures.add(
+			future{
+				testRunner(jsTestFileName)
+			}
+		)
+    }
+
+    futures.each{
+    	def exitCode = it.get()
     	if(exitCode != 0){
 			exitVal = 1
     	}
     }
     println "Tomate done in ${System.currentTimeMillis() - startTime}ms."
-    if (!argsMap.tomateUrl){
-		println "stopping server..."
-    	stopServer()
-	}
+    if(exitVal == 0){
+    	println "Tomate all tests passed."
+    }
 	return exitVal
 }

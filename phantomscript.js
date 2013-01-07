@@ -6,7 +6,7 @@ if(system.args.length < 3){
     phantom.exit(1);
 }
 
-console.log(system.args);
+//console.log(system.args);
 var appUrl = system.args[1];
 var fileName = system.args[2];
 var authParams, authUri2post = false;
