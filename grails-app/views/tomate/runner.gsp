@@ -15,12 +15,12 @@
 <body>
 	<r:layoutResources />
 
-	<g:if test="${params.fileName}">
-		<script type="text/javascript" src="${request.contextPath}/js/tests/${params.fileName}"></script>
-		<iframe src="about:blank" name="appFrame" width="1024" height="968"></iframe>
+	<g:if test="${fileName}">
+		<script type="text/javascript" src="${request.contextPath}/js/tests/${fileName}?t=${new Date().getTime()}"></script>
+		<iframe src="about:blank" name="appFrame" width="100%" height="968"></iframe>
 	</g:if>
 	<script type="text/javascript">
-		<g:if test="${params.fileName == null }">
+		<g:if test="${fileName == null }">
 			eval(parent.editor.codeEditor.getValue());
 		</g:if>
 

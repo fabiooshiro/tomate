@@ -23,7 +23,7 @@ grails run-app
 
 ```
 
-Open <a href="http://localhost:8080/how-to-tomate/tomate/welcome">http://localhost:8080/how-to-tomate/tomate/welcome</a>
+Open <a href="http://localhost:8080/how-to-tomate/tomate">http://localhost:8080/how-to-tomate/tomate</a>
 
 And start coding your test!
 

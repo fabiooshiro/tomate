@@ -3,14 +3,32 @@ package tomate
 class TomateController {
 
     def welcome(){
-        
+        redirect(view: 'index')
     }
 
-    def index() { }
+    def index() {
+        def ls = getFileList()
+        log.debug(ls)
+        [fileList: ls]
+    }
 
-    def runner() { }
+    def runner() {
+        def fileName = params.fileName
+        if(!fileName && params.id) fileName = params.id + '.js'
+        
+        [fileName: fileName]
+    }
 
-    def editor() { }
+    def ide(){
+
+    }
+
+    /**
+     * Ace window
+     */
+    def editor() {
+
+    }
 
     def menu() { }
 
@@ -20,6 +38,15 @@ class TomateController {
     	return dir
     }
 
+    private getFileList(){
+        def ls = []
+        getTestsDir().eachFile{
+            ls.add(it.name)
+        }
+        ls.sort()
+        return ls
+    }
+
     def writeFile() {
     	def file = new File(getTestsDir(), params.filename);
     	file.write(params.data)
@@ -27,11 +54,7 @@ class TomateController {
     }
 
     def listFiles(){
-    	def ls = []
-    	getTestsDir().eachFile{
-    		ls.add(it.name)
-    	}
-    	ls.sort()
+    	def ls = getFileList()
     	render(contentType: 'text/json'){
     		ls
     	}

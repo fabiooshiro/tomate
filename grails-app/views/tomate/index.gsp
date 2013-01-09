@@ -1,50 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta http-equiv="content-type" content="text/html;charset=utf-8"/>
-	<title>Tomate</title>
-	<style type="text/css">
-		#editor{
-			width: 70%;
-			height: 100%;
-			position: absolute;
-			top: 0;
-			right: 0;
-			border: 0px;
-		}
-		#menu{
-			width: 30%;
-			height: 50%;
-			position: absolute;
-			top: 0;
-			left: 0;
-			border: 0px;
-		}
-		#runner{
-			width: 30%;
-			height: 50%;
-			position: absolute;
-			bottom: 0;
-			left: 0;
-			border: 0px;
-		}
-	</style>
+	<title>Welcome</title>
 	<script type="text/javascript">
-	var config = {
-		contextPath: "${request.contextPath}"
-	};
+		function openTomate(){
+			window.open('ide', 'page','toolbar=no,location=no,status=no,menubar=yes,scrollbars=no,resizable=no,width=700,height=500');  
+		}
 	</script>
-
-	<r:require module="jquery" />
-	<r:require module="tomate" />
-
-	<r:layoutResources />
 </head>
 <body>
-	<iframe src="${createLink(controller: 'tomate', action: 'editor')}" name="editor" id="editor"></iframe>
-	<iframe src="${createLink(controller: 'tomate', action: 'menu')}" name="menu" id="menu" ></iframe>
-	<iframe src="about:blank" name="runner" id="runner" ></iframe>
+	<h1>Tomate</h1>
+	<p><a href="javascript: openTomate()">Start tomate here (IDE mode)</a></p>
 
-	<r:layoutResources />
+	<h2>Runner Mode</h2>
+	<div>
+		<g:if test="${fileList}">
+			<ul>
+				<g:each in="${fileList}" var="fileName" >
+					<li><g:link action="runner" id="${fileName}">${fileName}</g:link></li>
+				</g:each>
+			</ul>
+		</g:if>
+		<g:else>
+			No tests found.
+		</g:else>
+	</div>
+
 </body>
 </html>
