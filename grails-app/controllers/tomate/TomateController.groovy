@@ -7,18 +7,21 @@ class TomateController {
     }
 
     def index() {
-        def ls = getFileList()
-        log.debug(ls)
+        def ls = getFileList().collect{
+            it.endsWith('.js') ? it[0..-4]: it
+        }
         [fileList: ls]
     }
 
     def runner() {
         def fileName = params.fileName
         if(!fileName && params.id) fileName = params.id + '.js'
-        
         [fileName: fileName]
     }
 
+    /**
+     * Page IDE with jasmine, ace, etc
+     */
     def ide(){
 
     }

@@ -4,7 +4,7 @@
 	<title>Welcome</title>
 	<script type="text/javascript">
 		function openTomate(){
-			window.open('ide', 'page','toolbar=no,location=no,status=no,menubar=yes,scrollbars=no,resizable=no,width=700,height=500');  
+			window.open('${createLink(controller: "tomate", action: "ide")}', 'page','toolbar=no,location=no,status=no,menubar=yes,scrollbars=no,resizable=no,width=700,height=500');  
 		}
 	</script>
 </head>
@@ -17,7 +17,7 @@
 		<g:if test="${fileList}">
 			<ul>
 				<g:each in="${fileList}" var="fileName" >
-					<li><g:link action="runner" id="${fileName}">${fileName}</g:link></li>
+					<li><g:link action="runner" id="${fileName}">${fileName}.js</g:link></li>
 				</g:each>
 			</ul>
 		</g:if>
