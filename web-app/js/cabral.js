@@ -63,6 +63,19 @@ var cabral = new function(){
 		}
 	}
 
+	/**
+	 * Intercepted by TomateGrailsPlugin.groovy
+	 */
+	function defFillFile(el, fileName){
+		var name = el.getAttribute('name')
+		var parent = el.parentNode;
+		var input = getWin().document.createElement('input');
+		input.setAttribute('name', 'tomate_file_' + name);
+		input.setAttribute('value', fileName);
+		input.setAttribute('type', 'hidden');
+		parent.appendChild(input);
+	}
+
 	var regexComparator = function(uri){
 		return uri.exec(getWin().location.href);
 	};
@@ -111,12 +124,16 @@ var cabral = new function(){
 				if(links[i].innerHTML == arguments[0]){
 					actuateLink(links[i]);
 					self.waitFor(links[i].getAttribute('href'), arguments[1]);
-					break;
+					return;
 				}
 			}
+			console.log("Link not found with text '" + arguments[0] + "'.");
+			throw new Error("Link not found with text '" + arguments[0] + "'.");
 		}else if(arguments.length == 1){
 			actuateLink(arguments[0]);
 		}
 	};
+
+	this.fillFile = defFillFile;
 };
 
