@@ -26,4 +26,10 @@ modules = {
 		resource url: 'js/tomate-editor.js'	
 	}
 
+	"bootstrap-full"{
+		resource url: 'js/bootstrap.min.js'
+		resource url: 'css/bootstrap.min.css'
+		resource url: 'css/bootstrap-responsive.min.css'
+	}
+
 }
