@@ -1,5 +1,14 @@
 modules = {
 
+	'junit-reporter'{
+		resource url: 'js/jasmine.junit_reporter.js'
+	}
+
+	'waiting-4u-pero'{
+		dependsOn 'junit-reporter'
+		resource url: 'js/tomate-junit-adapter.js'
+	}
+
 	'jasmine-html'{
 		resource url: 'js/jasmine.js', disposition: 'head'
 		resource url: 'js/jasmine-html.js', disposition: 'head'
@@ -12,7 +21,7 @@ modules = {
 	}
 
 	tomate{
-		dependsOn 'jasmine-html, testcode-descriptor-reader'
+		dependsOn 'jasmine-html, testcode-descriptor-reader, waiting-4u-pero'
 		resource url: 'js/cabral.js', disposition: 'head'
 	}
 

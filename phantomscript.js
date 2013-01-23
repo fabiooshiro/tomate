@@ -6,6 +6,23 @@ if(system.args.length < 3){
     phantom.exit(1);
 }
 
+function writeXml(){
+    var xml = page.evaluate(function(){
+        return $('#xmlOut').val();
+    });
+    var fileName = page.evaluate(function(){
+        return $('#xmlOut').attr('data-filename');
+    });
+
+    var fs = require('fs');
+    var f = fs.open('target/test-reports/' + fileName, "w");
+    f.write(xml);
+    f.close();
+    console.log(fileName);
+    console.log(xml);
+}
+
+
 //console.log(system.args);
 var appUrl = system.args[1];
 var fileName = system.args[2];
@@ -49,7 +66,10 @@ window.setInterval(function(){
             }
             return ok;
         });
-        
+
+        // get perovaz report
+        writeXml();
+
         if(passed){
             console.log("All " + fileName + " tests passed.");
             phantom.exit();
@@ -65,14 +85,6 @@ window.setInterval(function(){
                 return errors.join('\n');
             });
             console.log(txtError);
-
-            //ini pero vaz
-            var fs = require('fs');
-            var f = fs.open('htmlcode.txt', "w");
-            f.write(page.content);
-            f.close();
-            //end pero vaz
-
             phantom.exit(1);
         }
     }
@@ -82,7 +94,7 @@ var tomatePageChecked = false;
 
 function openTomateRunner(){
     page.open(appUrl + '/tomate/runner?fileName=' + fileName, function () {
-        console.log('Page navigation...')
+        console.log('Some page navigation...')
         if(!tomatePageChecked){
             tomatePageChecked = true;
             var title = page.evaluate(function () {

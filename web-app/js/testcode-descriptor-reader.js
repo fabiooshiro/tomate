@@ -18,6 +18,8 @@ function getDescriptions(testCode){
 		currentDescribe.its.push(spec);
 	}
 
+	function xit(desc, itFunction){}
+	
 	eval(testCode);
 
 	return descriptions;
