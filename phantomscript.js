@@ -13,13 +13,15 @@ function writeXml(){
     var fileName = page.evaluate(function(){
         return $('#xmlOut').attr('data-filename');
     });
-
+    console.log(fileName);
+    console.log(xml);
     var fs = require('fs');
+    if(!fs.exists('target/test-reports')){
+        fs.makeDirectory('target/test-reports');
+    }
     var f = fs.open('target/test-reports/' + fileName, "w");
     f.write(xml);
     f.close();
-    console.log(fileName);
-    console.log(xml);
 }
 
 
