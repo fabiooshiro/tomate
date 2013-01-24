@@ -49,19 +49,8 @@ Brief summary/description of the plugin.
 
     def doWithDynamicMethods = { ctx ->
         // Implement registering dynamic methods to classes (optional)
-        // getFile interceptor
-        def originalMethod = org.springframework.web.multipart.MultipartRequest.metaClass.getMetaMethod("getFile", [String] as Class[])
-
-        javax.servlet.http.HttpServletRequest.metaClass.getFile = { String fileName ->
-            def fileNameValue = delegate.getParameter("tomate_file_${fileName}")
-            if(fileNameValue){
-                def file = new File(new File('test/resources'), fileNameValue)
-                return new org.springframework.mock.web.MockMultipartFile(fileNameValue, file.newInputStream())
-            }else{
-                if(delegate instanceof org.springframework.web.multipart.MultipartRequest)
-                return originalMethod.invoke(delegate, fileName)
-            }
-        }
+        def interceptor = new tomate.interceptors.RequestInterceptor()
+        interceptor.modifyGetFile(new File('test/resources'))
     }
 
     def doWithApplicationContext = { applicationContext ->
