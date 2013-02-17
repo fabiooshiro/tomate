@@ -1,23 +1,29 @@
 package tomate.interceptors
 
+import org.springframework.web.multipart.MultipartRequest
+import javax.servlet.http.HttpServletRequest
+import org.springframework.mock.web.MockMultipartFile
+
 class RequestInterceptor{
 
+    /**
+     * getFile interceptor
+     * @param File resourcesDir a directory to store test files
+     */
 	def modifyGetFile(resourcesDir){
-		// getFile interceptor
-        def originalMethod = org.springframework.web.multipart.MultipartRequest.metaClass.getMetaMethod("getFile", [String] as Class[])
 
-        javax.servlet.http.HttpServletRequest.metaClass.getFile = { String fileName ->
+        def originalMethod = MultipartRequest.metaClass.getMetaMethod("getFile", [String] as Class[])
+
+        HttpServletRequest.metaClass.getFile = { String fileName ->
             def fileNameValue = delegate.getParameter("tomate_file_${fileName}")
-            println "fileNameValue = ${fileNameValue} for tomate_file_${fileName}"
             if(fileNameValue){
                 def file = new File(resourcesDir, fileNameValue)
-                return new org.springframework.mock.web.MockMultipartFile(fileNameValue, fileNameValue, null, file.newInputStream())
+                return new MockMultipartFile(fileNameValue, fileNameValue, null, file.newInputStream())
             }else{
-                if(delegate instanceof org.springframework.web.multipart.MultipartRequest)
+                if(delegate instanceof MultipartRequest)
                 return originalMethod.invoke(delegate, fileName)
             }
         }
 	}
-
 
 }

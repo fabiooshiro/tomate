@@ -50,11 +50,14 @@ Brief summary/description of the plugin.
     def doWithDynamicMethods = { ctx ->
         // Implement registering dynamic methods to classes (optional)
         def interceptor = new tomate.interceptors.RequestInterceptor()
-        interceptor.modifyGetFile(new File('test/resources'))
+        def filesDir = application.config.tomate.filesdir ?: new File('test/resources')
+        println "Tomate: mocking file uploads from '${filesDir.getCanonicalPath()}'"
+        interceptor.modifyGetFile(filesDir)
     }
 
     def doWithApplicationContext = { applicationContext ->
         // TODO Implement post initialization spring config (optional)
+
     }
 
     def onChange = { event ->
