@@ -193,6 +193,46 @@ var Cabral = function(){
 	this.fillFile = function(el, fileName){
 		defFillFile(el, fileName);
 	}
+
+	// angular adapter
+	function fireEvent(element, eventName){
+		var event;
+		if (document.createEvent) {
+			event = document.createEvent("HTMLEvents");
+			event.initEvent(eventName, true, true);
+		} else {
+			event = document.createEventObject();
+			event.eventType = eventName;
+		}
+
+		event.eventName = eventName;
+		event.memo =  { };
+		event.target = element;
+
+		if (document.createEvent) {
+			element.dispatchEvent(event);
+		} else {
+			element.fireEvent("on" + event.eventType, event);
+		}
+	}
+
+	this.set = function(selector, value){
+		var els = getWin().$(selector).val(value);
+		for (var i = 0; i < els.length; i++) {
+			fireEvent(els[i], 'input');
+			fireEvent(els[i], 'change');
+		};
+		return this;
+	}
+
+	this.checkbox = function(selector, trueOrFalse){
+		var els = getWin().$(selector).attr('checked', trueOrFalse);
+		for (var i = 0; i < els.length; i++) {
+			fireEvent(els[i], 'change');
+			fireEvent(els[i], 'click');
+		};
+		return this;
+	}
 }
 
 var browser = new Cabral();
