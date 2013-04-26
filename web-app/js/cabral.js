@@ -176,7 +176,7 @@ var Cabral = function(){
 	};
 
 	/**
-	 * Pretend to fill a input type file.<br>
+	 * Pretend to fill an input type file.<br>
 	 * The javascript can't change a value of an input with type "file".<br>
 	 * So Cabral creates a hidden field to send your file name value.<br>
 	 * This value will be intercepted by TomateGrailsPlugin.groovy 
@@ -216,6 +216,16 @@ var Cabral = function(){
 		}
 	}
 
+	/**
+	 * Fill an input tag and trigger input and change events<br>
+	 * $(selector).val(value);
+	 * @param {string} selector jQuery selector
+	 * @param {string} value String value
+	 * @example
+	 * &lt;input type="text" id="myField" value="" />
+	 *
+	 * cabral.set("#myField", "some value");
+	 */
 	this.set = function(selector, value){
 		var els = getWin().$(selector).val(value);
 		for (var i = 0; i < els.length; i++) {
@@ -225,6 +235,17 @@ var Cabral = function(){
 		return this;
 	}
 
+	/**
+	 * Mark a checkbox and trigger input and change events<br>
+	 * $(selector).attr('checked', true);
+	 *
+	 * @param {string} selector jQuery selector
+	 * @param {boolean} Boolean true or false
+	 * @example
+	 * &lt;input type="checkbox" id="myChk" />
+	 *
+	 * cabral.checkbox("#myChk", true);
+	 */
 	this.checkbox = function(selector, trueOrFalse){
 		var els = getWin().$(selector).attr('checked', trueOrFalse);
 		for (var i = 0; i < els.length; i++) {
@@ -232,6 +253,33 @@ var Cabral = function(){
 			fireEvent(els[i], 'click');
 		};
 		return this;
+	}
+
+	/**
+	 * Choose a select value by option text/label
+	 * @param {string} selector jQuery selector
+	 * @param {string} label/text option text
+	 * @example
+	 * &lt;select id="myId" />
+     *     &lt;option value="1">some text label&lt;/option>
+	 *
+	 * cabral.select('#myId', 'some text label');
+	 */
+	this.select = function(selector, label){
+		var $ = getWin().$;
+		var els = $(selector);
+		for (var i = 0; i < els.length; i++) {
+			var options = $(els[i]).find('option');
+			for (var j = 0; j < options.length; j++) {
+				if($(options[j]).text() == label){
+					$(els[i]).val($(options[j]).attr('value'));
+					break;
+				}
+			}
+			fireEvent(els[i], 'change');
+			fireEvent(els[i], 'click');
+		};
+		return this;	
 	}
 }
 
