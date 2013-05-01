@@ -90,6 +90,7 @@ var Cabral = function(){
 	};
 
 	var endsWithComparator = function(uri){
+		if(!uri) return false;
 		var local = getWin().location.href.substr(uri.length * -1);
 		return local == uri;
 	};
