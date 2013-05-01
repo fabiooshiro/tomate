@@ -1,9 +1,11 @@
 import java.lang.StringBuffer
+import java.util.concurrent.*
 
 includeTargets << grailsScript("_GrailsRun")
 
 target('default': "Runs project and tomate") {
 	depends(checkVersion, configureProxy, packageApp, parseArguments)
+	def maxPhantomInstances = 1
 	def serverUrl
 	if (!argsMap.tomateUrl){
 		if (argsMap.https) {
@@ -58,14 +60,34 @@ target('default': "Runs project and tomate") {
     }
     ls.sort()
 
+	def pool = Executors.newFixedThreadPool(maxPhantomInstances)
+    def future = { c -> pool.submit(c as Callable) }
+    def futures = []
     def exitVal = 0
+
     def startTime = System.currentTimeMillis()
-    ls.each{
-    	def exitCode = testRunner(it)
-    	if(exitCode != 0){
-			exitVal = 1
+    ls.each{ jsTestFileName ->
+		futures.add(
+			future{
+				testRunner(jsTestFileName)
+			}
+		)
+    }
+
+    futures.each{
+    	try {
+    		println "waiting..."
+    		def exitCode = it.get(5, TimeUnit.MINUTES)
+	    	if(exitCode != 0){
+				exitVal = 1
+	    	}
+    	}catch(TimeoutException e){
+    		println "TLE 5m!"
+    		it.cancel(true)
+    		exitVal = 1
     	}
     }
+
     println "Tomate done in ${System.currentTimeMillis() - startTime}ms."
     if (!argsMap.tomateUrl){
 		println "stopping server..."
