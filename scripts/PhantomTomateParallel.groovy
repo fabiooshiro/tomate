@@ -69,6 +69,7 @@ target('default': "Runs project and tomate") {
 			exitVal = 1
     	}
     }
+
     println "Tomate done in ${System.currentTimeMillis() - startTime}ms."
     if(exitVal == 0){
     	println "Tomate all tests passed."

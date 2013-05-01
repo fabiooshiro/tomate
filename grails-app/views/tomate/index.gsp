@@ -7,7 +7,7 @@
 			window.open('${createLink(controller: "tomate", action: "ide")}', 'page','toolbar=no,location=no,status=no,menubar=yes,scrollbars=no,resizable=no,width=700,height=500');  
 		}
 	</script>
-	<r:require module="bootstrap-full" />
+	<r:require module="tomate-bootstrap" />
 	<r:layoutResources />
 
 	<style type="text/css">

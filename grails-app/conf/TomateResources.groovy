@@ -12,6 +12,7 @@ modules = {
 	'jasmine-html'{
 		resource url: 'js/jasmine.js', disposition: 'head'
 		resource url: 'js/jasmine-html.js', disposition: 'head'
+		resource url: 'js/jasmine-step.js', disposition: 'head'
 		resource url: 'css/jasmine.css', disposition: 'head'
 	}
 
@@ -35,10 +36,10 @@ modules = {
 		resource url: 'js/tomate-editor.js'	
 	}
 
-	"bootstrap-full"{
-		resource url: 'js/bootstrap.min.js'
-		resource url: 'css/bootstrap.min.css'
-		resource url: 'css/bootstrap-responsive.min.css'
+	"tomate-bootstrap"{
+		//resource url: 'js/bootstrap.min.js'
+		//resource url: 'css/bootstrap.min.css'
+		//resource url: 'css/bootstrap-responsive.min.css'
 	}
 
 }
