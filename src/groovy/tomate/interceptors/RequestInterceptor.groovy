@@ -18,6 +18,7 @@ class RequestInterceptor{
             def fileNameValue = delegate.getParameter("tomate_file_${fileName}")
             if(fileNameValue){
                 def file = new File(resourcesDir, fileNameValue)
+                println "requisitando ${file.getCanonicalPath()}"
                 return new MockMultipartFile(fileNameValue, fileNameValue, null, file.newInputStream())
             }else{
                 if(delegate instanceof MultipartRequest)
