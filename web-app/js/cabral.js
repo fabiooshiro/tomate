@@ -90,8 +90,11 @@ var Cabral = function(){
 	};
 
 	var endsWithComparator = function(uri){
+		console.log("uri = " + uri);
 		if(!uri) return false;
 		var local = getWin().location.href.substr(uri.length * -1);
+		console.log("local = " + local);
+		console.log("(local == uri) = " + (local == uri));
 		return local == uri;
 	};
 
@@ -164,7 +167,10 @@ var Cabral = function(){
 			var links = getWin().document.getElementsByTagName('a');
 			for(var i = 0; i < links.length; i++){
 				if(links[i].innerHTML == arguments[0]){
+					console.log("click over " + arguments[0])
 					actuateLink(links[i]);
+					console.log("waitFor " + links[i].getAttribute('href'));
+
 					self.waitFor(links[i].getAttribute('href'), arguments[1]);
 					return;
 				}
