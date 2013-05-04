@@ -95,7 +95,7 @@ var Cabral = function(){
 		var local = getWin().location.href.substr(uri.length * -1);
 		console.log("local = " + local);
 		console.log("(local == uri) = " + (local == uri));
-		return local == uri;
+		return local == uri || (local + '?') == uri;
 	};
 
 	var waitForUrl = function(uri, comparator, callback){
