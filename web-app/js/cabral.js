@@ -40,7 +40,7 @@ var Cabral = function(){
 				console.log('No jQuery found...');
 				callback(getWin(), args);
 			}
-		}, 100 );
+		}, 250 );
 	}
 
 	/**
@@ -89,13 +89,18 @@ var Cabral = function(){
 		return uri.exec(getWin().location.href);
 	};
 
+	function endsWith(str, suffix) {
+		return str.indexOf(suffix, str.length - suffix.length) !== -1;	
+	}
+
 	var endsWithComparator = function(uri){
 		console.log("uri = " + uri);
 		if(!uri) return false;
-		var local = getWin().location.href.substr(uri.length * -1);
+		var local = getWin().location.href;
+		var res = endsWith(getWin().location.href, uri);
 		console.log("local = " + local);
-		console.log("(local == uri) = " + (local == uri));
-		return local == uri || (local + '?') == uri;
+		console.log("(local == uri) = " + res);
+		return res;
 	};
 
 	var waitForUrl = function(uri, comparator, callback){
