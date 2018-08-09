@@ -1,12 +1,12 @@
 # Tomate
 
 Tomate is a <a href="http://grails.org">Grails</a> plugin for javascript testing.
-Using <a href="http://pivotal.github.com/jasmine/">jasmine.js</a> and ace.js
+Using <a href="https://jasmine.github.io/">jasmine.js</a> and ace.js
 
 ## Target
 
 1. Export results to CI
-2. Smooth learning curve (<a href="http://jquery.com/">jQuery</a> and <a href="http://pivotal.github.com/jasmine/">Jasmine</a>)
+2. Smooth learning curve (<a href="http://jquery.com/">jQuery</a> and <a href="https://jasmine.github.io/">Jasmine</a>)
 3. Code and Run (not code compile wait Zzzz.. and run)
 4. Browser powered debug tools. eg. firebug, chrome
 5. Some page navigation (<a href="https://github.com/fabiooshiro/cabral">Cabral</a>)
